@@ -1,44 +1,43 @@
-import type { Config } from 'tailwindcss';
+import { Config } from 'tailwindcss';
 
 const config: Config = {
+  darkMode: 'class',
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/**/*.{js,ts,jsx,tsx,mdx}',
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
       colors: {
-        pink: {
-          500: '#ec4899',
-          600: '#db2777',
+        slate: {
+          950: '#020617',
         },
-        purple: {
-          500: '#8b5cf6',
-          600: '#7c3aed',
-        },
-        rose: {
-          100: '#ffe4e6',
-          800: '#9f1239',
-        },
+        indigo: {
+          600: '#4f46e5',
+          500: '#6366f1',
+          400: '#818cf8',
+        }
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
       },
       animation: {
-        'fade-in': 'fadeIn 0.5s ease-in-out',
+        'fade-in': 'fadeIn 0.3s ease-out forwards',
+        'fade-in-up': 'fadeInUp 0.5s ease-out forwards',
       },
       keyframes: {
         fadeIn: {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },
         },
+        fadeInUp: {
+          '0%': { opacity: '0', transform: 'translateY(10px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        }
       },
-      transitionDuration: {
-        '300': '300ms',
-        '500': '500ms',
-      },
+      borderWidth: {
+        '3': '3px',
+      }
     },
   },
   plugins: [],

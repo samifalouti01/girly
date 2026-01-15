@@ -1,13 +1,18 @@
 import React from 'react';
-import { createRoot } from 'react-dom/client';
+import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
 
-const root = createRoot(
-  document.getElementById('root') as HTMLElement
-);
+// The main entry point for the React application
+// It renders the App component into the root element
 
-root.render(
+const rootElement = document.getElementById('root');
+
+if (!rootElement) {
+  throw new Error('Root element not found in index.html');
+}
+
+ReactDOM.createRoot(rootElement).render(
   <React.StrictMode>
     <App />
   </React.StrictMode>

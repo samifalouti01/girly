@@ -1,80 +1,82 @@
 import React from 'react';
 
-interface InputProps {
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {
+  label?: string;
+  name: string;
   type?: string;
   placeholder?: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-  label?: string;
-  name?: string;
+  error?: string;
   required?: boolean;
   className?: string;
-  multiline?: boolean;
-  rows?: number;
-  id?: string;
-  disabled?: boolean;
-  ariaLabel?: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
 
 const Input: React.FC<InputProps> = ({
-  type = 'text',
-  placeholder = '',
-  value,
-  onChange,
   label,
   name,
+  type = 'text',
+  placeholder,
+  error,
   required = false,
   className = '',
-  multiline = false,
-  rows = 4,
-  id,
-  disabled = false,
-  ariaLabel,
+  value,
+  onChange,
+  ...props
 }) => {
-  const baseInputStyles = 'w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:border-pink-500 focus:ring-4 focus:ring-pink-100 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed';
-  
-  const inputId = id || (label ? `input-${label.toLowerCase().replace(/\s+/g, '-')}` : undefined);
+  const baseInputClasses = `
+    w-full 
+    bg-slate-900 
+    border 
+    rounded-lg 
+    px-4 
+    py-3 
+    text-white 
+    placeholder:text-slate-500 
+    transition-all 
+    duration-200 
+    focus:border-indigo-500 
+    focus:ring-1 
+    focus:ring-indigo-500
+    disabled:opacity-50 
+    disabled:cursor-not-allowed
+  `;
 
-  const inputProps = {
-    id: inputId,
-    name,
-    value,
-    onChange,
-    required,
-    disabled,
-    className: `${baseInputStyles} ${className}`,
-    placeholder,
-    'aria-label': ariaLabel || (label ? label : placeholder),
-  };
+  const errorClasses = error ? 'border-rose-600 focus:border-rose-500 focus:ring-rose-500' : 'border-slate-700 hover:border-slate-600';
+
+  const combinedClasses = `${baseInputClasses} ${errorClasses} ${className}`;
 
   return (
-    <div className="w-full">
+    <div className="space-y-1">
       {label && (
-        <label
-          htmlFor={inputId}
-          className="block text-sm font-medium text-gray-700 mb-2"
+        <label 
+          htmlFor={name} 
+          className="block text-sm font-medium text-slate-300"
         >
           {label}
-          {required && <span className="text-pink-500 ml-1">*</span>}
+          {required && <span className="text-indigo-400 ml-0.5">*</span>}
         </label>
       )}
-      
-      {multiline ? (
-        <textarea
-          {...inputProps}
-          rows={rows}
-          aria-invalid="false"
-        />
-      ) : (
-        <input
-          type={type}
-          {...inputProps}
-          aria-invalid="false"
-        />
+      <input
+        id={name}
+        name={name}
+        type={type}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        className={combinedClasses}
+        aria-required={required}
+        aria-invalid={!!error}
+        {...props}
+      />
+      {error && (
+        <div className="flex items-center gap-1 text-xs text-rose-400 mt-1" role="alert">
+          <span className="font-bold">!</span>
+          {error}
+        </div>
       )}
     </div>
   );
 };
 
 export default Input;
-export type { InputProps };
