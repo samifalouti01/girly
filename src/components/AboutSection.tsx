@@ -1,138 +1,158 @@
 import React from 'react';
-import { Award, Users, Zap, Globe, ChevronRight, CheckCircle } from 'lucide-react';
-import Card from './Card';
+import { Award, Users, Heart, Zap, ChevronRight, Sparkles } from 'lucide-react';
+import Button from './Button';
 
-export interface AboutSectionProps {
-  onNavigateToContact: () => void;
+interface AboutSectionProps {
+  onCtaClick: () => void;
+  className?: string;
 }
 
-const AboutSection: React.FC<AboutSectionProps> = ({ onNavigateToContact }) => {
-  const [mounted, setMounted] = React.useState<boolean>(false);
-
-  React.useEffect(() => {
-    const timer = setTimeout(() => setMounted(true), 50);
-    return () => clearTimeout(timer);
-  }, []);
-
+const AboutSection: React.FC<AboutSectionProps> = ({ onCtaClick, className = '' }) => {
   const stats = [
-    { value: '5+', label: 'Years Experience', icon: Award, color: 'text-indigo-400' },
-    { value: '10k+', label: 'Happy Customers', icon: Users, color: 'text-emerald-400' },
-    { value: '99.9%', label: 'Uptime', icon: Zap, color: 'text-pink-400' },
-    { value: '50+', label: 'Countries Served', icon: Globe, color: 'text-purple-400' },
+    { number: '10+', label: 'Years Experience', icon: Award, color: 'text-pink-500' },
+    { number: '500+', label: 'Happy Clients', icon: Users, color: 'text-purple-500' },
+    { number: '100%', label: 'Quality Assurance', icon: Heart, color: 'text-pink-500' },
+    { number: '24/7', label: 'Support', icon: Zap, color: 'text-purple-500' },
   ];
 
-  const values = [
-    'Innovation at the core of every product',
-    'Customer satisfaction is our top priority',
-    'Sustainable and ethical business practices',
-    'Continuous improvement and evolution',
-    'Premium quality without compromise'
+  const features = [
+    {
+      title: 'Premium Materials',
+      description: 'We source only the finest fabrics to ensure durability, comfort, and elegance in every piece.',
+      icon: Award,
+    },
+    {
+      title: 'Sustainable Fashion',
+      description: 'Our commitment to the environment means eco-friendly production methods and ethical sourcing.',
+      icon: Heart,
+    },
+    {
+      title: 'Perfect Fit Guarantee',
+      description: 'Every pair of pants is tailored to flatter your silhouette and provide unmatched comfort.',
+      icon: Users,
+    },
+    {
+      title: 'Fast Delivery',
+      description: 'Get your favorite styles delivered quickly and safely to your doorstep anywhere in the world.',
+      icon: Zap,
+    },
   ];
 
   return (
-    <section 
-      id="about-section"
-      className="w-full py-20 bg-slate-900 relative overflow-hidden"
+    <section
+      id="about"
+      className={`py-16 md:py-24 bg-white ${className}`}
       aria-labelledby="about-heading"
     >
-      {/* Background decoration */}
-      <div className="absolute inset-0 opacity-5 pointer-events-none">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-600 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-600 rounded-full blur-3xl transform -translate-x-1/2 translate-y-1/2" />
-      </div>
-
-      <div className="container mx-auto px-4 relative z-10">
-        
-        {/* Header */}
-        <div className={`text-center mb-16 transition-all duration-700 transform ${
-          mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}>
-          <h2 
-            id="about-heading"
-            className="text-3xl md:text-5xl font-bold text-white mb-4"
-          >
-            About DarkCommerce
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="text-center mb-12 md:mb-16">
+          <div className="inline-flex items-center gap-2 bg-rose-100 text-rose-800 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+            <Sparkles size={16} />
+            <span>Our Story</span>
+          </div>
+          <h2 id="about-heading" className="text-3xl md:text-4xl font-bold text-pink-600 mb-4">
+            About Girly Pants Boutique
           </h2>
-          <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-            We are pioneers in the digital marketplace, redefining how you shop with cutting-edge technology and exceptional service.
+          <p className="text-base md:text-lg text-gray-700 max-w-2xl mx-auto leading-relaxed">
+            We believe every woman deserves pants that make her feel confident, comfortable, and stylish.
           </p>
         </div>
 
-        {/* Mission Statement */}
-        <div className={`max-w-4xl mx-auto mb-16 transition-all duration-700 delay-100 transform ${
-          mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}>
-          <Card className="p-8 md:p-12 text-center border-indigo-500/30">
-            <div className="flex flex-col items-center space-y-6">
-              <div className="w-16 h-16 bg-indigo-600/20 rounded-full flex items-center justify-center border border-indigo-500/50">
-                <Zap className="w-8 h-8 text-indigo-400" />
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+          {/* Left Column - Image & Stats */}
+          <div className="space-y-8">
+            {/* Main Image */}
+            <div className="relative">
+              <div className="bg-gradient-to-br from-pink-100 to-purple-100 rounded-2xl p-4 shadow-xl">
+                <img
+                  src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
+                  alt="Founder of Girly Pants Boutique standing with premium pant collection"
+                  className="w-full h-80 md:h-96 object-cover rounded-xl"
+                  loading="lazy"
+                />
               </div>
-              <h3 className="text-2xl md:text-3xl font-bold text-white">Our Mission</h3>
-              <p className="text-lg text-slate-400 leading-relaxed">
-                To deliver the most advanced e-commerce experience by combining premium product curation, 
-                lightning-fast performance, and a visually stunning dark-mode interface that adapts to the modern user.
+              
+              {/* Floating Quote */}
+              <div className="absolute -bottom-6 -right-6 bg-white rounded-xl p-4 shadow-lg border border-pink-100 max-w-xs hidden md:block">
+                <p className="text-sm font-semibold text-gray-800 italic">
+                  "Fashion is about dreaming until you become someone else."
+                </p>
+                <p className="text-xs text-gray-500 mt-1">— Coco Chanel</p>
+              </div>
+            </div>
+
+            {/* Stats Grid */}
+            <div className="grid grid-cols-2 gap-4">
+              {stats.map((stat, index) => {
+                const Icon = stat.icon;
+                return (
+                  <div
+                    key={stat.label}
+                    className="bg-gray-50 rounded-xl p-4 text-center border border-gray-100 transition-all duration-300 hover:shadow-md hover:-translate-y-1"
+                  >
+                    <Icon className={`mx-auto mb-2 ${stat.color}`} size={24} />
+                    <p className="text-2xl font-bold text-gray-900">{stat.number}</p>
+                    <p className="text-sm text-gray-600">{stat.label}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Right Column - Content & Features */}
+          <div className="space-y-6">
+            <div className="space-y-4">
+              <h3 className="text-2xl md:text-3xl font-semibold text-purple-600">
+                We Empower Women Through Style
+              </h3>
+              <p className="text-base md:text-lg text-gray-700 leading-relaxed">
+                Founded in 2014, Girly Pants Boutique started with a simple mission: to create premium pants that combine style, comfort, and quality. We noticed that women often struggled to find pants that fit perfectly and made them feel confident.
+              </p>
+              <p className="text-base md:text-lg text-gray-700 leading-relaxed">
+                Today, we're proud to offer a curated collection of pants for every occasion—from office-ready trousers to weekend-chic casuals and summer florals. Every piece is designed with the modern woman in mind.
               </p>
             </div>
-          </Card>
-        </div>
 
-        {/* Stats Grid */}
-        <div className={`grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-16 transition-all duration-700 delay-200 transform ${
-          mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}>
-          {stats.map((stat, index) => {
-            const Icon = stat.icon;
-            return (
-              <Card 
-                key={index} 
-                className="text-center py-6 hover:border-indigo-500/50 transition-all duration-300 hover:-translate-y-1"
+            {/* Features List */}
+            <div className="grid sm:grid-cols-2 gap-4 pt-4">
+              {features.map((feature) => {
+                const Icon = feature.icon;
+                return (
+                  <div
+                    key={feature.title}
+                    className="bg-gradient-to-br from-rose-50 to-purple-50 rounded-xl p-5 border border-rose-100 transition-all duration-300 hover:shadow-lg"
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-10 h-10 bg-pink-500 rounded-lg flex items-center justify-center text-white shadow-md">
+                        <Icon size={18} />
+                      </div>
+                      <h4 className="font-bold text-gray-900">{feature.title}</h4>
+                    </div>
+                    <p className="text-sm text-gray-700 leading-relaxed">{feature.description}</p>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* CTA Button */}
+            <div className="pt-6">
+              <Button
+                variant="primary"
+                onClick={onCtaClick}
+                className="group flex items-center justify-center gap-2 w-full sm:w-auto"
+                ariaLabel="Explore our collection and find your perfect pair"
               >
-                <Icon className={`w-6 h-6 mx-auto mb-3 ${stat.color}`} />
-                <div className="text-2xl font-bold text-white mb-1">{stat.value}</div>
-                <div className="text-sm text-slate-400">{stat.label}</div>
-              </Card>
-            );
-          })}
+                <span>Find Your Perfect Pair</span>
+                <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </div>
+          </div>
         </div>
-
-        {/* Core Values & CTA */}
-        <div className={`grid grid-cols-1 lg:grid-cols-2 gap-8 transition-all duration-700 delay-300 transform ${
-          mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}>
-          
-          {/* Values List */}
-          <Card className="p-8">
-            <h3 className="text-xl font-bold text-white mb-6">Our Core Values</h3>
-            <ul className="space-y-4">
-              {values.map((value, index) => (
-                <li key={index} className="flex items-start space-x-3">
-                  <CheckCircle className="w-5 h-5 text-emerald-500 mt-0.5 flex-shrink-0" />
-                  <span className="text-slate-300">{value}</span>
-                </li>
-              ))}
-            </ul>
-          </Card>
-
-          {/* CTA Card */}
-          <Card className="p-8 bg-gradient-to-br from-slate-800/50 to-indigo-900/20 border-indigo-500/30 flex flex-col justify-center">
-            <h3 className="text-xl font-bold text-white mb-3">Ready to Get Started?</h3>
-            <p className="text-slate-400 mb-6">
-              Join thousands of satisfied customers experiencing the future of e-commerce today.
-            </p>
-            <button
-              onClick={onNavigateToContact}
-              className="w-full md:w-auto inline-flex items-center justify-center px-6 py-3 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-500 hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-400 group"
-              aria-label="Contact us to get started"
-            >
-              Contact Us
-              <ChevronRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
-            </button>
-          </Card>
-        </div>
-
       </div>
     </section>
   );
 };
 
 export default AboutSection;
+export type { AboutSectionProps };

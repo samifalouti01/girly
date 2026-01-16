@@ -1,129 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DarkCommerce | Premium Tech Gadgets</title>
-    <meta name="description" content="A dark-themed, animated single-page e-commerce application featuring premium tech gadgets and accessories.">
-    <meta name="theme-color" content="#0f172a">
-    
-    <!-- Preconnect for performance -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Girly Pants Boutique</title>
+    <meta name="description" content="A sophisticated, visually appealing single-page React application dedicated to showcasing premium women's pants with elegant design and smooth interactions." />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <!-- Fonts: Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <!-- Tailwind CSS via CDN for immediate usage (in production, use build process) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "https://esm.sh/react@18.2.0",
+          "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+          "lucide-react": "https://esm.sh/lucide-react@0.309.0"
+        }
+      }
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        slate: {
-                            950: '#020617',
-                        },
-                        indigo: {
-                            600: '#4f46e5',
-                            500: '#6366f1',
-                            400: '#818cf8',
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif'],
-                    },
-                    animation: {
-                        'fade-in': 'fadeIn 0.3s ease-out forwards',
-                        'fade-in-up': 'fadeInUp 0.5s ease-out forwards',
-                    },
-                    keyframes: {
-                        fadeIn: {
-                            '0%': { opacity: '0' },
-                            '100%': { opacity: '1' },
-                        },
-                        fadeInUp: {
-                            '0%': { opacity: '0', transform: 'translateY(10px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        }
-                    }
-                }
-            }
-        }
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              pink: {
+                500: '#ec4899',
+                600: '#db2777',
+              },
+              purple: {
+                500: '#8b5cf6',
+                600: '#7c3aed',
+              },
+              rose: {
+                100: '#ffe4e6',
+                800: '#9f1239',
+              },
+            },
+            fontFamily: {
+              sans: ['Inter', 'system-ui', 'sans-serif'],
+            },
+            animation: {
+              'fade-in': 'fadeIn 0.5s ease-in-out',
+            },
+            keyframes: {
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
+            },
+            transitionDuration: {
+              '300': '300ms',
+              '500': '500ms',
+            },
+          },
+        },
+      }
     </script>
-
-    <!-- Custom CSS for additional styles and animations -->
     <style>
-        body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background-color: #0f172a; /* slate-900 */
-            color: #cbd5e1; /* slate-300 */
-            overflow-x: hidden;
-        }
-
-        /* Scrollbar styling for webkit browsers */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0f172a;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #334155;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #475569;
-        }
-
-        /* Smooth scroll behavior */
+      html {
+        scroll-behavior: smooth;
+      }
+      @media (prefers-reduced-motion: reduce) {
         html {
-            scroll-behavior: smooth;
+          scroll-behavior: auto;
         }
-
-        /* Focus visible styles for accessibility */
-        *:focus-visible {
-            outline: 2px solid #818cf8;
-            outline-offset: 2px;
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
         }
-
-        /* Disable animations for users who prefer reduced motion */
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            ::before,
-            ::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-                scroll-behavior: auto !important;
-            }
-        }
-
-        /* Line clamp utilities */
-        .line-clamp-2 {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
+      }
     </style>
-</head>
-<body class="antialiased">
-    <div id="root" class="min-h-screen w-full"></div>
-
-    <!-- Import Map for React and Dependencies -->
-    <script type="importmap">
-    {
-        "imports": {
-            "react": "https://esm.sh/react@18.2.0",
-            "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
-            "lucide-react": "https://esm.sh/lucide-react@0.263.1"
-        }
-    }
-    </script>
-
-    <!-- Main Application Entry Point -->
+  </head>
+  <body class="bg-white text-gray-800 font-sans antialiased">
+    <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-</body>
+  </body>
 </html>
